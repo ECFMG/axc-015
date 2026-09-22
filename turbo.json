@@ -1,0 +1,62 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"ui": "tui",
+	"globalPassThroughEnv": ["WORKTREE_NAME", "NODE_ENV", "PORT"],
+	"tasks": {
+		"build": {
+			"description": "Compiles TypeScript and bundles each package",
+			"dependsOn": ["^build"],
+			"inputs": ["src/**", "tsconfig*.json", "rolldown.config.ts", "scripts/**", "host.json", "package.json"],
+			"outputs": ["dist/**", "deploy/**", "*.zip", "*.tsbuildinfo", "build/**"]
+		},
+		"typecheck": {
+			"description": "Typechecks packages that expose a typecheck script",
+			"dependsOn": ["^build"],
+			"outputs": []
+		},
+		"test": {
+			"description": "Runs unit and integration tests",
+			"dependsOn": ["^build", "@cellix/config-vitest#build"],
+			"inputs": ["$TURBO_DEFAULT$", "**/*.test.ts"]
+		},
+		"test:arch": {
+			"description": "Runs architecture fitness tests",
+			"dependsOn": ["^build", "@cellix/config-vitest#build", "@cellix/archunit-tests#build"],
+			"outputs": []
+		},
+		"test:acceptance": {
+			"description": "Runs Serenity/Cucumber acceptance tests",
+			"dependsOn": ["^build", "@apps/api#build", "@cellix/serenity-framework#build", "@cellix/local-dev#build"],
+			"outputs": ["reports/**", "target/**"],
+			"cache": false
+		},
+		"dev": {
+			"description": "Starts application packages through portless",
+			"dependsOn": ["^build", "@cellix/local-dev#build"],
+			"cache": false,
+			"persistent": true
+		},
+		"start": {
+			"description": "Starts the built API with the Azure Functions host",
+			"dependsOn": ["build"],
+			"cache": false,
+			"persistent": true
+		},
+		"lint": {
+			"description": "Runs the Biome linter",
+			"outputs": []
+		},
+		"format": {
+			"description": "Formats source files with Biome",
+			"outputs": []
+		},
+		"format:check": {
+			"description": "Checks source formatting with Biome without writing changes",
+			"outputs": []
+		},
+		"clean": {
+			"description": "Removes generated build artifacts",
+			"cache": false
+		}
+	}
+}

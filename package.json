@@ -1,0 +1,51 @@
+{
+	"name": "agentcourses",
+	"version": "0.0.0",
+	"private": true,
+	"packageManager": "pnpm@11.9.0",
+	"engines": {
+		"node": ">=24"
+	},
+	"scripts": {
+		"dev": "pnpm run proxy:ensure && turbo watch dev --filter=@apps/api",
+		"proxy:ensure": "pnpm exec portless proxy start --https -p 1355 || true",
+		"test": "turbo run test test:acceptance",
+		"test:arch": "turbo run test:arch",
+		"test:acceptance": "turbo run test:acceptance --filter=@axc-verification/acceptance-api",
+		"typecheck": "turbo run typecheck",
+		"build": "turbo run build",
+		"start": "pnpm --filter @apps/api start",
+		"lint": "biome lint",
+		"format": "biome format --write",
+		"format:check": "biome format .",
+		"knip": "knip",
+		"e18e": "pnpm dlx @e18e/cli analyze --log-level error --quiet",
+		"audit": "pnpm audit --audit-level=high",
+		"snyk": "node scripts/snyk-verify.mjs",
+		"verify": "node scripts/check-script-policy.mjs && biome check . && pnpm run typecheck && pnpm run build && pnpm run knip && pnpm run e18e && pnpm run test:arch && pnpm run test && pnpm run audit && pnpm run snyk",
+		"prepare": "husky"
+	},
+	"optionalDependencies": {
+		"@rolldown/binding-darwin-arm64": "1.2.9",
+		"@rolldown/binding-linux-x64-gnu": "1.2.9"
+	},
+	"devDependencies": {
+		"@amiceli/vitest-cucumber": "^6.3.0",
+		"@biomejs/biome": "2.4.10",
+		"@types/node": "catalog:",
+		"@types/react": "19.2.7",
+		"@types/react-dom": "19.2.3",
+		"@typescript/native-preview": "catalog:",
+		"husky": "^9.1.7",
+		"knip": "^5.64.2",
+		"lint-staged": "^16.2.0",
+		"portless": "0.11.1",
+		"ts-scope-trimmer-plugin": "^1.0.2",
+		"turbo": "2.9.18",
+		"vitest": "catalog:",
+		"typescript": "catalog:"
+	},
+	"lint-staged": {
+		"*.{ts,tsx,js,jsx,mjs,cjs,json,md}": "biome check --write --no-errors-on-unmatched"
+	}
+}

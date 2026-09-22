@@ -1,0 +1,13 @@
+{
+	"extends": "@cellix/config-typescript/node",
+	"compilerOptions": {
+		"lib": ["ES2023", "DOM"],
+		"exactOptionalPropertyTypes": false,
+		"outDir": "dist",
+		"types": ["node"],
+		"rootDir": "src",
+		"tsBuildInfoFile": "dist/tsconfig.tsbuildinfo"
+	},
+	"include": ["src"],
+	"references": [{ "path": "../../packages/cellix/api-core" }, { "path": "../../packages/axc/application-services" }, { "path": "../../packages/axc/rest" }]
+}

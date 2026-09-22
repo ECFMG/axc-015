@@ -1,0 +1,52 @@
+{
+	"$schema": "https://unpkg.com/knip@5/schema.json",
+	"workspaces": {
+		".": {
+			"entry": ["scripts/**/*.mjs"],
+			"project": ["scripts/**/*.mjs"]
+		},
+		"apps/api": {
+			"entry": ["src/index.ts", "start-dev.ts", "rolldown.config.ts", "scripts/**/*.{ts,mjs}"],
+			"project": ["src/**/*.ts", "scripts/**/*.ts", "*.ts"]
+		},
+		"apps/docs": {
+			"entry": ["docusaurus.config.ts", "sidebars.ts", "start-dev.ts", "scripts/**/*.mjs"],
+			"project": ["src/**/*.{ts,tsx}", "*.ts"]
+		},
+		"packages/cellix/*": {
+			"project": ["src/**/*.ts"]
+		},
+		"packages/cellix/serenity-framework": {
+			"project": ["src/**/*.ts"],
+			"ignoreDependencies": ["@testing-library/react", "playwright", "react"]
+		},
+		"packages/cellix/config-vitest": {
+			"ignoreDependencies": ["@vitest/coverage-istanbul"]
+		},
+		"packages/cellix/mongoose-seedwork": {
+			"entry": ["src/index.ts"],
+			"project": ["src/**/*.ts"],
+			"ignore": ["**/mongo-connection.ts"]
+		},
+		"packages/axc/*": {
+			"entry": ["src/index.ts", "vitest.config.ts"],
+			"project": ["src/**/*.ts"]
+		},
+		"packages/axc-verification/archunit-tests": {
+			"entry": ["src/**/*.test.ts", "vitest.config.ts"],
+			"project": ["src/**/*.ts"]
+		},
+		"packages/axc-verification/acceptance-api": {
+			"entry": ["cucumber.js", "src/serenity.ts", "src/world.ts", "src/step-definitions/**/*.ts", "src/infrastructure.ts"],
+			"project": ["src/**/*.ts"],
+			"ignoreUnresolved": ["progress-bar"]
+		}
+	},
+	"ignoreWorkspaces": ["packages/cellix/config-typescript"],
+	"ignore": ["**/fixtures/**", "**/*.test.ts", "**/*.spec.ts", "**/dist/**", "**/coverage/**", "**/tests/**", ".grok/**", ".github/**", "portless.config.cjs"],
+	"ignoreDependencies": ["@types/*", "ts-scope-trimmer-plugin", "@serenity-js/console-reporter"],
+	"ignoreIssues": {
+		"packages/cellix/archunit-tests/src/validate-compiler-options.ts": ["exports", "types"]
+	},
+	"ignoreBinaries": ["func", "serenity-bdd", "zip"]
+}

@@ -1,0 +1,17 @@
+{
+	"version": 1,
+	"skills": {
+		"portless": {
+			"source": "vercel-labs/portless",
+			"sourceType": "github",
+			"skillPath": "skills/portless/SKILL.md",
+			"computedHash": "c97d5a9840cee601a9f71a1241c014d756d03225a0e9bf54cc849160fa952df8"
+		},
+		"turborepo": {
+			"source": "vercel/turborepo",
+			"sourceType": "github",
+			"skillPath": "skills/turborepo/SKILL.md",
+			"computedHash": "81a7613f3d90be42c04eb247180159098a854e8c404560fa23ef53410c85834e"
+		}
+	}
+}

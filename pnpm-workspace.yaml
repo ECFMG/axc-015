@@ -1,0 +1,60 @@
+packages:
+  - "apps/*"
+  - "packages/cellix/*"
+  - "packages/axc/*"
+  - "packages/axc-verification/*"
+
+engineStrict: true
+
+# Disable pnpm 11's auto-install on script runs. CI explicitly runs
+# `pnpm install --frozen-lockfile` before turbo tasks; concurrent auto-installs
+# from parallel turbo workers kill each other with SIGINT (#289).
+verifyDepsBeforeRun: false
+
+catalog:
+  '@apollo/server': 5.5.0
+  '@azure/functions': 4.11.0
+  '@cucumber/cucumber': 12.8.1
+  '@cucumber/messages': 32.3.1
+  '@serenity-js/assertions': 3.43.0
+  '@serenity-js/console-reporter': 3.43.0
+  '@serenity-js/core': 3.43.0
+  '@serenity-js/rest': 3.43.0
+  '@serenity-js/serenity-bdd': 3.43.0
+  '@storybook/addon-vitest': ^10.4.2
+  '@types/node': 24.10.1
+  '@typescript/native-preview': 7.0.0-dev.20260428.1
+  '@vitest/browser-playwright': 4.1.10
+  '@vitest/coverage-istanbul': 4.1.10
+  archunit: ^2.1.63
+  graphql: ^16.10.0
+  hono: 4.12.25
+  mongodb: 6.18.0
+  mongodb-memory-server: ^10.1.4
+  mongodb-memory-server-core: 10.1.4
+  mongoose: 8.24.1
+  playwright: 1.59.0
+  react: 19.2.0
+  react-dom: 19.2.0
+  rimraf: 6.0.1
+  tsx: ^4.21.0
+  typescript: 6.0.3
+  vitest: 4.1.10
+
+auditConfig:
+  ignoreGhsas: []
+
+overrides:
+  happy-dom: 20.10.1
+  '@happy-dom/global-registrator': 20.10.1
+  axios: 1.18.0
+  serialize-javascript: 7.0.3
+
+patchedDependencies:
+  '@azure/functions@4.11.0': patches/@azure__functions@4.11.0.patch
+
+allowBuilds:
+  '@apollo/protobufjs': false
+  core-js: false
+  esbuild: false
+  mongodb-memory-server: false

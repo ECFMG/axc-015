@@ -1,0 +1,24 @@
+{
+	"name": "@axc-verification/archunit-tests",
+	"version": "1.0.0",
+	"description": "Architectural fitness tests for agentCourses",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"test:arch": "vitest run",
+		"test:watch": "vitest",
+		"typecheck": "tsgo --noEmit",
+		"lint": "biome lint",
+		"format": "biome format --write",
+		"format:check": "biome format ."
+	},
+	"devDependencies": {
+		"@cellix/archunit-tests": "workspace:*",
+		"@cellix/config-typescript": "workspace:*",
+		"@cellix/config-vitest": "workspace:*",
+		"@types/node": "catalog:",
+		"archunit": "catalog:",
+		"typescript": "catalog:",
+		"vitest": "catalog:"
+	}
+}

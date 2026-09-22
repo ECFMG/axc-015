@@ -1,0 +1,9 @@
+{
+	"extends": "@cellix/config-typescript/node",
+	"compilerOptions": {
+		"noEmit": true,
+		"rootDir": "src"
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": []
+}

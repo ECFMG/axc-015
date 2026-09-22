@@ -1,0 +1,27 @@
+node_modules
+.pnpm-store
+.DS_Store
+**/coverage
+lcov-report
+local.settings.json
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Turborepo
+.turbo
+
+# Local Azure Functions deployment bundle
+apps/api/deploy/
+apps/api/agentCourses-api.zip
+
+# Serenity and Cucumber reports
+**/reports/
+**/target/
+
+# Agent runtime artifacts
+.agents-work/
+
+# Docusaurus
+apps/docs/.docusaurus/
+apps/docs/build/

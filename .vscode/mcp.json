@@ -1,0 +1,11 @@
+{
+	"servers": {
+		"e18e": {
+			"command": "pnpm",
+			"args": ["dlx", "@e18e/mcp"]
+		},
+		"bothy-board": {
+			"url": "https://bothyboard.com/api/mcp"
+		}
+	}
+}
