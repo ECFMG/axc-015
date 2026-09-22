@@ -61,6 +61,6 @@ Husky and lint-staged format staged files on commit. `pnpm run verify` and the G
 
 ## Local tools
 
-- Azure Functions Core Tools v4 (`func`) for `pnpm run dev`, `pnpm run start`, and acceptance tests. Workers that do not list Node.js 24 in their allowlist are copied at startup and extended so the host can load the built API. Install Core Tools 4.11 or newer when you want the stock worker.
+- Azure Functions Core Tools v4 (`func`) for `pnpm run dev`, `pnpm run start`, and acceptance tests.
 - A JRE for the Serenity BDD report
 - Snyk CLI, authenticated, when security results should fail the gate

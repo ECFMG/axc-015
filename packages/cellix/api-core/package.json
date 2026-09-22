@@ -2,6 +2,7 @@
 	"name": "@cellix/api-core",
 	"version": "1.0.0",
 	"private": true,
+	"description": "Azure Functions application bootstrap for Cellix API applications",
 	"type": "module",
 	"files": [
 		"dist"
@@ -13,14 +14,16 @@
 		}
 	},
 	"scripts": {
-		"lint": "biome lint",
 		"format": "biome format --write",
 		"format:check": "biome format .",
 		"prebuild": "pnpm run lint",
 		"build": "tsgo --build",
-		"typecheck": "tsgo --noEmit",
 		"watch": "tsgo --watch",
-		"clean": "rimraf dist tsconfig.tsbuildinfo"
+		"test": "vitest run --silent --reporter=dot",
+		"test:coverage": "vitest run --coverage --silent --reporter=dot",
+		"test:watch": "vitest",
+		"lint": "biome lint",
+		"clean": "rimraf dist"
 	},
 	"dependencies": {
 		"@azure/functions": "catalog:",
@@ -29,7 +32,10 @@
 	},
 	"devDependencies": {
 		"@cellix/config-typescript": "workspace:*",
+		"@cellix/config-vitest": "workspace:*",
+		"@vitest/coverage-istanbul": "catalog:",
 		"rimraf": "catalog:",
-		"typescript": "catalog:"
+		"typescript": "catalog:",
+		"vitest": "catalog:"
 	}
 }

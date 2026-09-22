@@ -1,9 +1,7 @@
 import { spawn } from 'node:child_process';
 import { AzureFunctionsLocalSettings } from '@cellix/local-dev';
-import { ensureNodeWorker } from './func-worker.ts';
 
 const port = process.env['PORT'] ?? '7071';
-const workerDirectory = ensureNodeWorker();
 
 new AzureFunctionsLocalSettings({
 	values: {
@@ -14,10 +12,6 @@ new AzureFunctionsLocalSettings({
 
 const child = spawn('func', ['start', '--typescript', '--script-root', 'deploy/', '--port', port, '--cors', '*'], {
 	stdio: ['ignore', 'pipe', 'pipe'],
-	env: {
-		...process.env,
-		...(workerDirectory ? { languageWorkers__node__workerDirectory: workerDirectory } : {}),
-	},
 });
 
 child.stdout?.on('data', (chunk: Buffer) => {

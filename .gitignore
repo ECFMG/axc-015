@@ -5,8 +5,9 @@ node_modules
 lcov-report
 local.settings.json
 
-# TypeScript cache
+# TypeScript cache and package build output
 *.tsbuildinfo
+**/dist/
 
 # Turborepo
 .turbo
