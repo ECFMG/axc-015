@@ -1,3 +1,6 @@
+import { createSeededCourseCatalog } from '@axc/persistence';
+import { type CourseSearchQuery, type CourseSearchResult, searchCourses } from './course-search.ts';
+
 export const HEALTH_SERVICE_NAME = 'agentCourses-api' as const;
 export const HEALTH_PROJECT_CODE = 'axc' as const;
 
@@ -19,6 +22,9 @@ export interface ApplicationServices {
 	health: {
 		getStatus(): HealthStatus;
 	};
+	courses: {
+		search(query: CourseSearchQuery): CourseSearchResult;
+	};
 }
 
 export interface ApplicationServicesFactory {
@@ -36,6 +42,7 @@ export function resolveEnvironment(nodeEnv: string | undefined): HealthEnvironme
 }
 
 export function buildApplicationServicesFactory(context: ApiContext): ApplicationServicesFactory {
+	const catalog = createSeededCourseCatalog();
 	const forRequest = (): Promise<ApplicationServices> =>
 		Promise.resolve({
 			health: {
@@ -49,7 +56,14 @@ export function buildApplicationServicesFactory(context: ApiContext): Applicatio
 					};
 				},
 			},
+			courses: {
+				search(query: CourseSearchQuery): CourseSearchResult {
+					return searchCourses(catalog, query);
+				},
+			},
 		});
 
 	return { forRequest };
 }
+
+export type { CourseSearchPage, CourseSearchQuery, CourseSearchResult, InvalidQueryParameterError, QueryParameterErrorDetail } from './course-search.ts';
