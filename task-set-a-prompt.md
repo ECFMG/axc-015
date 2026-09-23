@@ -42,4 +42,4 @@ Do not modify authentication, production configuration, deployment pipelines, se
 11. Add tests for success, filters, pagination, sorting, validation failures, and no-match results.
 12. Add or update courses documentation.
 
-Run the relevant tests, lint, and build commands if available. Provide a short summary of what changed, commands run, test results, and any known limitations.
+Run the relevant tests, lint, and build commands if available. Provide a short summary of what changed, commands run, test results, cost/usage and any known limitations.
