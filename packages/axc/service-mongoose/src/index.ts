@@ -12,3 +12,5 @@ export type MongoConnection = Connection;
 export function createMemoryMongoServer(): MongoMemoryServer {
 	return new MongoMemoryServer();
 }
+
+export { createSeededCourseCatalog } from './course-catalog.ts';

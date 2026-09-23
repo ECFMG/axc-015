@@ -1,3 +1,7 @@
+import type { CourseCatalog } from '@axc/domain';
+import { createInMemoryCourseCatalog } from '@axc/persistence';
+import { type CourseSearchService, createCourseSearch } from './course-search.ts';
+
 export const HEALTH_SERVICE_NAME = 'agentCourses-api' as const;
 export const HEALTH_PROJECT_CODE = 'axc' as const;
 
@@ -19,10 +23,15 @@ export interface ApplicationServices {
 	health: {
 		getStatus(): HealthStatus;
 	};
+	courses: CourseSearchService;
 }
 
 export interface ApplicationServicesFactory {
 	forRequest(rawAuthHeader?: string): Promise<ApplicationServices>;
+}
+
+export interface ApplicationServicesDependencies {
+	courseCatalog?: CourseCatalog;
 }
 
 export function resolveEnvironment(nodeEnv: string | undefined): HealthEnvironment {
@@ -35,7 +44,9 @@ export function resolveEnvironment(nodeEnv: string | undefined): HealthEnvironme
 	return 'local';
 }
 
-export function buildApplicationServicesFactory(context: ApiContext): ApplicationServicesFactory {
+export function buildApplicationServicesFactory(context: ApiContext, dependencies?: ApplicationServicesDependencies): ApplicationServicesFactory {
+	const courseCatalog = dependencies?.courseCatalog ?? createInMemoryCourseCatalog();
+	const courses = createCourseSearch(courseCatalog);
 	const forRequest = (): Promise<ApplicationServices> =>
 		Promise.resolve({
 			health: {
@@ -49,7 +60,11 @@ export function buildApplicationServicesFactory(context: ApiContext): Applicatio
 					};
 				},
 			},
+			courses,
 		});
 
 	return { forRequest };
 }
+
+export type { CourseQueryErrorDetail, CourseQueryInput, CourseSearchService } from './course-search.ts';
+export { InvalidCourseQueryError } from './course-search.ts';
