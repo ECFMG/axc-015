@@ -53,4 +53,4 @@ Do not modify authentication, production configuration, deployment pipelines, se
 15. Add or update docs for enrollment requests
 16. Existing tests must still pass.
 
-Run the relevant tests, lint, and build commands if available. Provide a short summary of what changed, commands run, test results, and any known limitations.
+Run the relevant tests, lint, and build commands if available. Provide a short summary of what changed, commands run, test results, cost/usage and any known limitations.
