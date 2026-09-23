@@ -15,7 +15,7 @@ Implement a GET /api/courses endpoint for a training course catalog.
 Use only the allowed write boundary:
 
 - apps/api/** rest routing / functional wiring
-- packages/cellix/** can continue to port over packages from github repo CellixJS/cellixjs
+- packages/cellix/** can continue to port over packages from github repo CellixJS/cellixjs; these vendored packages should **NEVER** deviate from the original source repository
 - packages/axc/rest/** hono logic
 - packages/axc/application-services/** application services
 - packages/axc/persistence/** data storage
